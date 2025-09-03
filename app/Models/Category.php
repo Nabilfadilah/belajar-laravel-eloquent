@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+    // atributte yang dibutuhkan di model
+    protected $table = 'categories'; // kita overide, refresintasi dari table nama table nya
+    protected $primaryKey = 'id'; // kolom primaryKey nya Id
+    protected $keyType = 'string'; // key type nya apa, kita kasih string
+    public $incrementing = false; // apakah autoincrement?
+    public $timestamps = false; // apakah ada timestamp?
 }
