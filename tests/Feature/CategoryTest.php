@@ -85,25 +85,35 @@ class CategoryTest extends TestCase
         self::assertTrue($result); // harus true
     }
 
-    // public function testSelect()
-    // {
-    //     for ($i = 0; $i < 5; $i++) {
-    //         $category = new Category();
-    //         $category->id = "ID $i";
-    //         $category->name = "Name $i";
-    //         $category->is_active = true;
-    //         $category->save();
-    //     }
+    // Select
+    public function testSelect()
+    {
+        // untuk tambah 5 data 
+        for ($i = 0; $i < 5; $i++) {
+            $category = new Category(); // untuk table Category 
+            $category->id = "ID $i"; // isi id nya
+            $category->name = "Name $i"; // isi name nya
+            // $category->is_active = true; 
+            $category->save(); // simpan datanya
+        }
 
-    //     $categories = Category::whereNull("description")->get();
-    //     self::assertEquals(5, $categories->count());
-    //     $categories->each(function ($category) {
-    //         self::assertNull($category->description);
+        // lakukan query dari semua data description nya Null
+        $categories = Category::whereNull("description")->get();
 
-    //         $category->description = "Updated";
-    //         $category->update();
-    //     });
-    // }
+        // hasilnya harus ada 5 data categories
+        self::assertEquals(5, $categories->count());
+
+        // each, setiap category
+        $categories->each(function ($category) {
+            // pastikan tidak kosong/null, dari category description nya
+            self::assertNull($category->description);
+
+            // kita bisa melakukan operasi lainnya pada hasil select Model tersebut, misal melakukan update
+            // tiap category kita update, menjadi "Updated"
+            $category->description = "Updated";
+            $category->update(); // lalu panggil update
+        });
+    }
 
     // public function testUpdateMany()
     // {
