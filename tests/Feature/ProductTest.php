@@ -86,17 +86,20 @@ class ProductTest extends TestCase
         }
     }
 
+    // One Of Many Polymorphic (--- BUG ---)
     // public function testOneOfManyPolymorphic()
     // {
+    //     // ambil seeder
     //     $this->seed([CategorySeeder::class, ProductSeeder::class, VoucherSeeder::class, CommentSeeder::class]);
 
+    //     // ambil data product id 1
     //     $product = Product::find("1");
-    //     self::assertNotNull($product);
+    //     self::assertNotNull($product); // tidak boleh kosong
 
-    //     $comment = $product->latestComment;
+    //     $comment = $product->latestComment; // ambil semua data lastComment
     //     self::assertNotNull($comment);
 
-    //     $comment = $product->oldestComment;
+    //     $comment = $product->oldestComment; // ambil semua data oldestComment
     //     self::assertNotNull($comment);
     // }
 

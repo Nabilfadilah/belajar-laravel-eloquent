@@ -52,17 +52,20 @@ class Product extends Model
         return $this->morphMany(Comment::class, "commentable");
     }
 
-    // public function latestComment(): MorphOne
-    // {
-    //     return $this->morphOne(Comment::class, "commentable")
-    //         ->latest("created_at");
-    // }
+    // one of many
+    // comment paling terkahir  (--- BUG ---)
+    public function latestComment(): MorphOne
+    {
+        return $this->morphOne(Comment::class, "commentable")
+            ->latest("created_at");
+    }
 
-    // public function oldestComment(): MorphOne
-    // {
-    //     return $this->morphOne(Comment::class, "commentable")
-    //         ->oldest("created_at");
-    // }
+    // comment paling awal  (--- BUG ---)
+    public function oldestComment(): MorphOne
+    {
+        return $this->morphOne(Comment::class, "commentable")
+            ->oldest("created_at");
+    }
 
     // public function tags(): MorphToMany
     // {

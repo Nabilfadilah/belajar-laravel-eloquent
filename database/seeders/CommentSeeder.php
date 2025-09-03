@@ -28,6 +28,8 @@ class CommentSeeder extends Seeder
         $comment->title = "Title";
         $comment->commentable_id = $product->id;
         $comment->commentable_type = 'product';
+        // karena untuk polymorphic relation, Laravel expect nilai commentable_type berupa Fully Qualified Class Name (FQCN) dari model, bukan string biasa.
+        // $comment->commentable_type = Product::class; (-- BUG --)
         $comment->save();
     }
 
@@ -40,6 +42,8 @@ class CommentSeeder extends Seeder
         $comment->title = "Title";
         $comment->commentable_id = $voucher->id;
         $comment->commentable_type = 'voucher';
+        // karena untuk polymorphic relation, Laravel expect nilai commentable_type berupa Fully Qualified Class Name (FQCN) dari model, bukan string biasa.
+        // $comment->commentable_type = Voucher::class; (-- BUG --)
         $comment->save();
     }
 }
