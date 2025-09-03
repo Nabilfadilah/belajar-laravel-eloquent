@@ -34,21 +34,25 @@ class CustomerTest extends TestCase
         self::assertEquals(1000000, $wallet->amount);
     }
 
-    // public function testOneToOneQuery()
-    // {
-    //     $customer = new Customer();
-    //     $customer->id = "ABIL";
-    //     $customer->name = "Abil";
-    //     $customer->email = "abil@abl.com";
-    //     $customer->save();
+    // one to one query
+    public function testOneToOneQuery()
+    {
+        // model customer
+        $customer = new Customer();
+        $customer->id = "ABIL";
+        $customer->name = "Abil";
+        $customer->email = "abil@abl.com";
+        $customer->save(); //simpan
 
-    //     $wallet = new Wallet();
-    //     $wallet->amount = 1000000;
+        $wallet = new Wallet(); // model wallet
+        $wallet->amount = 1000000; // isi amount 1 juta
 
-    //     $customer->wallet()->save($wallet);
+        // jadi wallet() bisa lakukan CRUD
+        $customer->wallet() // balikan adalah hashOne
+            ->save($wallet); // insert data
 
-    //     self::assertNotNull($wallet->customer_id);
-    // }
+        self::assertNotNull($wallet->customer_id);
+    }
 
     // public function testHasOneThrough()
     // {
