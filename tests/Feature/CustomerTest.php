@@ -105,37 +105,47 @@ class CustomerTest extends TestCase
         self::assertCount(0, $products);
     }
 
-    // public function testPivotAttribute()
-    // {
-    //     $this->testManyToMany();
+    // Pivot attribute
+    public function testPivotAttribute()
+    {
+        // ambil function
+        $this->testManyToMany();
 
-    //     $customer = Customer::find("EKO");
-    //     $products = $customer->likeProducts;
+        // customer id EKO
+        $customer = Customer::find("EKO");
+        $products = $customer->likeProducts; // ambil data likeproduct
 
-    //     foreach ($products as $product) {
-    //         $pivot = $product->pivot;
-    //         self::assertNotNull($pivot);
-    //         self::assertNotNull($pivot->customer_id);
-    //         self::assertNotNull($pivot->product_id);
-    //         self::assertNotNull($pivot->created_at);
-    //     }
-    // }
+        // iterasi product
+        foreach ($products as $product) {
+            $pivot = $product->pivot; // dalam product ada vipot nya
+            // hasilnya tidak boleh kosong untuk pivot, customer_id, product_id, created_at
+            self::assertNotNull($pivot); // pivot, isinya semua kolom-kolom yang ada di intermediate table nya
+            self::assertNotNull($pivot->customer_id);
+            self::assertNotNull($pivot->product_id);
+            self::assertNotNull($pivot->created_at);
+        }
+    }
 
-    // public function testPivotAttributeCondition()
-    // {
-    //     $this->testManyToMany();
+    // Intermediate Table Condition
+    public function testPivotAttributeCondition()
+    {
+        // ambil function
+        $this->testManyToMany();
 
-    //     $customer = Customer::find("EKO");
-    //     $products = $customer->likeProductsLastWeek;
+        // customer id EKO
+        $customer = Customer::find("EKO");
+        $products = $customer->likeProductsLastWeek; // ambil data likeproductslastweek
 
-    //     foreach ($products as $product) {
-    //         $pivot = $product->pivot;
-    //         self::assertNotNull($pivot);
-    //         self::assertNotNull($pivot->customer_id);
-    //         self::assertNotNull($pivot->product_id);
-    //         self::assertNotNull($pivot->created_at);
-    //     }
-    // }
+        // iterasi product
+        foreach ($products as $product) {
+            // hasilnya tidak boleh kosong untuk pivot, customer_id, product_id, created_at
+            $pivot = $product->pivot; // pivot, isinya semua kolom-kolom yang ada di intermediate table nya
+            self::assertNotNull($pivot);
+            self::assertNotNull($pivot->customer_id);
+            self::assertNotNull($pivot->product_id);
+            self::assertNotNull($pivot->created_at);
+        }
+    }
 
     // public function testPivotModel()
     // {
