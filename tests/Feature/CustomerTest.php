@@ -147,25 +147,30 @@ class CustomerTest extends TestCase
         }
     }
 
-    // public function testPivotModel()
-    // {
-    //     $this->testManyToMany();
+    // Pivot
+    public function testPivotModel()
+    {
+        // ambil function
+        $this->testManyToMany();
 
-    //     $customer = Customer::find("EKO");
-    //     $products = $customer->likeProducts;
+        // customer id EKO
+        $customer = Customer::find("EKO");
+        $products = $customer->likeProducts; // ambil semua data like product
 
-    //     foreach ($products as $product) {
-    //         $pivot = $product->pivot; // object Model Like
-    //         self::assertNotNull($pivot);
-    //         self::assertNotNull($pivot->customer_id);
-    //         self::assertNotNull($pivot->product_id);
-    //         self::assertNotNull($pivot->created_at);
+        // iterasi product
+        foreach ($products as $product) {
+            $pivot = $product->pivot; // object Model Like
+            // hasilnya tidak boleh kosong untuk pivot, customer_id, product_id, created_at, customer, product
+            self::assertNotNull($pivot);
+            self::assertNotNull($pivot->customer_id);
+            self::assertNotNull($pivot->product_id);
+            self::assertNotNull($pivot->created_at);
 
-    //         self::assertNotNull($pivot->customer);
+            self::assertNotNull($pivot->customer);
 
-    //         self::assertNotNull($pivot->product);
-    //     }
-    // }
+            self::assertNotNull($pivot->product);
+        }
+    }
 
     // public function testOneToOnePolymorphic()
     // {

@@ -41,8 +41,8 @@ class Customer extends Model
     public function likeProducts(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, "table_customers_likes_products", "customer_id", "product_id")
-            ->withPivot("created_at"); // Untuk mendapatkan informasi dari Intermediate Table, kita bisa menggunakan attribute
-        // ->using(Like::class);
+            ->withPivot("created_at") // Untuk mendapatkan informasi dari Intermediate Table, kita bisa menggunakan attribute
+            ->using(Like::class); // pivot class
     }
 
     // ambil data barang/products yang like oleh customer, tapi 1 minggu yang lalu
@@ -50,8 +50,8 @@ class Customer extends Model
     {
         return $this->belongsToMany(Product::class, "table_customers_likes_products", "customer_id", "product_id")
             ->withPivot("created_at") // Untuk mendapatkan informasi dari Intermediate Table, kita bisa menggunakan attribute
-            ->wherePivot("created_at", ">=", Date::now()->addDays(-7)); // pake wherePivot sulusinya.
-        // ->using(Like::class);
+            ->wherePivot("created_at", ">=", Date::now()->addDays(-7)) // pake wherePivot sulusinya.
+            ->using(Like::class); // pivot class
     }
 
     // public function image(): MorphOne

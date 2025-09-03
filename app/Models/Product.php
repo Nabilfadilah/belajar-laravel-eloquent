@@ -33,8 +33,8 @@ class Product extends Model
     public function likedByCustomers(): BelongsToMany
     {
         return $this->belongsToMany(Customer::class, "table_customers_likes_products", "product_id", "customer_id")
-            ->withPivot("created_at"); // Untuk mendapatkan informasi dari Intermediate Table, kita bisa menggunakan attribute
-        // ->using(Like::class);
+            ->withPivot("created_at")  // Untuk mendapatkan informasi dari Intermediate Table, kita bisa menggunakan attribute
+            ->using(Like::class);
     }
 
     // public function image(): MorphOne
