@@ -13,4 +13,11 @@ class Category extends Model
     protected $keyType = 'string'; // key type nya apa, kita kasih string
     public $incrementing = false; // apakah autoincrement?
     public $timestamps = false; // apakah ada timestamp?
+
+    // fillable attribute
+    protected $fillable = [
+        'id',
+        'name',
+        'description',
+    ];
 }

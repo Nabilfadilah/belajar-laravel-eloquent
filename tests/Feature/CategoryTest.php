@@ -190,49 +190,59 @@ class CategoryTest extends TestCase
         assertEquals(0, $total); // hasilnya sama dengan 0, dari total data 
     }
 
-    // public function testCreate()
-    // {
-    //     $request = [
-    //         "id" => "FOOD",
-    //         "name" => "Food",
-    //         "description" => "Food Category"
-    //     ];
+    // Fillable Attributes
+    public function testCreate()
+    {
+        // ini kita bisa ambil di request 
+        $request = [
+            // id => jadi key, akan jadi kolom
+            // "food" => jadi value 
+            "id" => "FOOD",
+            "name" => "Food",
+            "description" => "Food Category"
+        ];
 
-    //     $category = new Category($request);
-    //     $category->save();
+        // berikan model category dan request nya apa
+        $category = new Category($request);
+        $category->save(); // save data
 
-    //     self::assertNotNull($category->id);
-    // }
+        self::assertNotNull($category->id); // id tidak boleh kosong
+    }
 
-    // public function testCreateUsingQueryBuilder()
-    // {
-    //     $request = [
-    //         "id" => "FOOD",
-    //         "name" => "Food",
-    //         "description" => "Food Category"
-    //     ];
+    // create method
+    public function testCreateUsingQueryBuilder()
+    {
+        $request = [
+            "id" => "FOOD",
+            "name" => "Food",
+            "description" => "Food Category"
+        ];
 
-    //     // $category = Category::query()->create($request);
-    //     $category = Category::create($request);
+        // $category = Category::query()->create($request);
+        $category = Category::create($request); // create method, harus ada create untuk create data
 
-    //     self::assertNotNull($category->id);
-    // }
+        self::assertNotNull($category->id);
+    }
 
-    // public function testUpdateMass()
-    // {
-    //     $this->seed(CategorySeeder::class);
+    // update model
+    public function testUpdateMass()
+    {
+        $this->seed(CategorySeeder::class);
 
-    //     $request = [
-    //         "name" => "Food Updated",
-    //         "description" => "Food Category Updated"
-    //     ];
+        // dari request
+        $request = [
+            // ambil dari name dan description
+            "name" => "Food Updated",
+            "description" => "Food Category Updated"
+        ];
 
-    //     $category = Category::find("FOOD");
-    //     $category->fill($request);
-    //     $category->save();
+        // data category, temukan dari id 'FOOD'
+        $category = Category::find("FOOD");
+        $category->fill($request); // fill(attribute) update model, mengisi requestnya
+        $category->save(); // simpan data
 
-    //     self::assertNotNull($category->id);
-    // }
+        self::assertNotNull($category->id); // id tidak boleh kosong
+    }
 
     // public function testGlobalScope()
     // {
