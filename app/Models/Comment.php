@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Comment extends Model
 {
@@ -19,4 +20,10 @@ class Comment extends Model
         'title' => 'Sample Title',
         'comment' => 'Sample Comment',
     ];
+
+    // one to many
+    public function commentable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }
