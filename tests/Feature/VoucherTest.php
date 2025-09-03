@@ -58,17 +58,18 @@ class VoucherTest extends TestCase
         self::assertNotNull($voucher); // hasilnya vourcher tidak boleh kosong
     }
 
-    // public function testLocalScope()
-    // {
-    //     $voucher = new Voucher();
-    //     $voucher->name = "Sample Voucher";
-    //     $voucher->is_active = true;
-    //     $voucher->save();
+    // Query Local Scope
+    public function testLocalScope()
+    {
+        $voucher = new Voucher();
+        $voucher->name = "Sample Voucher";
+        $voucher->is_active = true;
+        $voucher->save();
 
-    //     $total = Voucher::active()->count();
-    //     self::assertEquals(1, $total);
+        $total = Voucher::active()->count(); // lasngsung panggil active()
+        self::assertEquals(1, $total);
 
-    //     $total = Voucher::nonActive()->count();
-    //     self::assertEquals(0, $total);
-    // }
+        $total = Voucher::nonActive()->count();
+        self::assertEquals(0, $total);
+    }
 }
