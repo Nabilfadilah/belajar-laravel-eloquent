@@ -172,18 +172,24 @@ class CustomerTest extends TestCase
         }
     }
 
-    // public function testOneToOnePolymorphic()
-    // {
-    //     $this->seed([CustomerSeeder::class, ImageSeeder::class]);
+    // Test One to One Polymorphic
+    public function testOneToOnePolymorphic()
+    {
+        // ambil seeder
+        $this->seed([CustomerSeeder::class, ImageSeeder::class]);
 
-    //     $customer = Customer::find("EKO");
-    //     self::assertNotNull($customer);
+        // dd(\App\Models\Image::all());
 
-    //     $image = $customer->image;
-    //     self::assertNotNull($image);
+        // ambil data product id 1
+        $customer = Customer::find("EKO");
+        self::assertNotNull($customer); // gal boleh null
 
-    //     self::assertEquals("https://www.programmerzamannow.com/image/1.jpg", $image->url);
-    // }
+        $image = $customer->image; // ambil semua data image
+        self::assertNotNull($image); // gakboleh null
+
+        // img url
+        self::assertEquals("https://www.programmerzamannow.com/image/1.jpg", $image->url);
+    }
 
     // public function testEager()
     // {

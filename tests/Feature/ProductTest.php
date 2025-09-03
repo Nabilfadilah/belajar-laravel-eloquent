@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Category;
 use App\Models\Product;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\ImageSeeder;
 use Database\Seeders\ProductSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -47,18 +48,22 @@ class ProductTest extends TestCase
         self::assertEquals("2", $mostExpensiveProduct->id); // pastikan datanya ke 2
     }
 
-    // public function testOneToOnePolymorphic()
-    // {
-    //     $this->seed([CategorySeeder::class, ProductSeeder::class, ImageSeeder::class]);
+    // Test One to One Polymorphic
+    public function testOneToOnePolymorphic()
+    {
+        // ambil seeder
+        $this->seed([CategorySeeder::class, ProductSeeder::class, ImageSeeder::class]);
 
-    //     $product = Product::find("1");
-    //     self::assertNotNull($product);
+        // ambil data product id 1
+        $product = Product::find("1");
+        self::assertNotNull($product); // gak boleh null
 
-    //     $image = $product->image;
-    //     self::assertNotNull($image);
+        $image = $product->image; // ambil semua data image
+        self::assertNotNull($image); // gak boleh null
 
-    //     self::assertEquals("https://www.programmerzamannow.com/image/2.jpg", $image->url);
-    // }
+        // image url
+        self::assertEquals("https://www.programmerzamannow.com/image/2.jpg", $image->url);
+    }
 
     // public function testOneToManyPolymorphic()
     // {

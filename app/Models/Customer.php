@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Date;
 
 class Customer extends Model
@@ -54,8 +55,10 @@ class Customer extends Model
             ->using(Like::class); // pivot class
     }
 
-    // public function image(): MorphOne
-    // {
-    //     return $this->morphOne(Image::class, "imageable");
-    // }
+    // One to One Polymorphic
+    public function image(): MorphOne // ambil 1 image
+    {
+        // ambil ke model image, dari nama kolom "imageable"
+        return $this->morphOne(Image::class, "imageable");
+    }
 }

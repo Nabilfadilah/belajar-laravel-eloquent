@@ -16,6 +16,7 @@ abstract class TestCase extends BaseTestCase
 
         // selalu lakukan delete ketika awal database
         DB::delete("delete from reviews");
+        DB::delete("delete from images");
         DB::delete("delete from table_customers_likes_products");
         DB::delete("delete from products");
         DB::delete("delete from categories");
