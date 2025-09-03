@@ -24,17 +24,20 @@ class CommentTest extends TestCase
         self::assertNotNull($comment->id); // hasilnya kolom id tida boleh kosong
     }
 
-    // public function testDefaultAttributeValues()
-    // {
-    //     $comment = new Comment();
-    //     $comment->email = "eko@pzn.com";
-    //     $comment->commentable_id = '1';
-    //     $comment->commentable_type = 'product';
+    // Default attribute values
+    public function testDefaultAttributeValues()
+    {
+        $comment = new Comment();
+        // isi datanya
+        $comment->email = "eldo@pzn.com";
+        // $comment->commentable_id = '1';
+        // $comment->commentable_type = 'product';
 
-    //     $comment->save();
+        $comment->save(); // simpan data 
 
-    //     self::assertNotNull($comment->id);
-    //     self::assertNotNull($comment->title);
-    //     self::assertNotNull($comment->comment);
-    // }
+        // hasilnya tidak boleh ksong id, title, comment
+        self::assertNotNull($comment->id);
+        self::assertNotNull($comment->title);
+        self::assertNotNull($comment->comment);
+    }
 }
