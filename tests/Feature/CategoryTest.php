@@ -56,18 +56,20 @@ class CategoryTest extends TestCase
         self::assertEquals(10, $total);
     }
 
-    // public function testFind()
-    // {
-    //     $this->seed(CategorySeeder::class);
+    // Find
+    public function testFind()
+    {
+        // ambil seeder class category 
+        $this->seed(CategorySeeder::class);
 
-    //     // $category = Category::query()->find("FOOD");
-    //     $category = Category::find("FOOD");
+        // $category = Category::query()->find("FOOD");
+        $category = Category::find("FOOD"); // pada model category, temukan id FOOD
 
-    //     self::assertNotNull($category);
-    //     self::assertEquals("FOOD", $category->id);
-    //     self::assertEquals("Food", $category->name);
-    //     self::assertEquals("Food Category", $category->description);
-    // }
+        self::assertNotNull($category); // tidak boleh kosong
+        self::assertEquals("FOOD", $category->id); // hasilnya harus id FOOD dari teble category
+        self::assertEquals("Food", $category->name); // namanya 
+        self::assertEquals("Food Category", $category->description); // descripsinya
+    }
 
     // public function testUpdate()
     // {
