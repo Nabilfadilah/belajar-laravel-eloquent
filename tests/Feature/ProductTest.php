@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Product;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\ProductSeeder;
@@ -26,21 +27,25 @@ class ProductTest extends TestCase
         self::assertEquals("FOOD", $category->id); // harus FOOD cateroty id nya
     }
 
-    // public function testHasOneOfMany()
-    // {
-    //     $this->seed([CategorySeeder::class, ProductSeeder::class]);
+    // Has One of Many
+    public function testHasOneOfMany()
+    {
+        // ambil seeder
+        $this->seed([CategorySeeder::class, ProductSeeder::class]);
 
-    //     $category = Category::find("FOOD");
-    //     self::assertNotNull($category);
+        $category = Category::find("FOOD"); // model category ambil data berdasarkan id FOOD
+        self::assertNotNull($category);
 
-    //     $cheapestProduct = $category->cheapestProduct;
-    //     self::assertNotNull($cheapestProduct);
-    //     self::assertEquals("1", $cheapestProduct->id);
+        // langsung panggil product paling murah
+        $cheapestProduct = $category->cheapestProduct;
+        self::assertNotNull($cheapestProduct); // gak boleh kosong
+        self::assertEquals("1", $cheapestProduct->id); // datanya harus 1, dari cheapestProduct id 
 
-    //     $mostExpensiveProduct = $category->mostExpensiveProduct;
-    //     self::assertNotNull($mostExpensiveProduct);
-    //     self::assertEquals("2", $mostExpensiveProduct->id);
-    // }
+        // langsung panggil product paling mahal
+        $mostExpensiveProduct = $category->mostExpensiveProduct;
+        self::assertNotNull($mostExpensiveProduct); // gak boleh kosong
+        self::assertEquals("2", $mostExpensiveProduct->id); // pastikan datanya ke 2
+    }
 
     // public function testOneToOnePolymorphic()
     // {
