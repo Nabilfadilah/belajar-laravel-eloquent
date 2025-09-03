@@ -115,26 +115,36 @@ class CategoryTest extends TestCase
         });
     }
 
-    // public function testUpdateMany()
-    // {
-    //     $categories = [];
-    //     for ($i = 0; $i < 10; $i++) {
-    //         $categories[] = [
-    //             "id" => "ID $i",
-    //             "name" => "Name $i",
-    //             'is_active' => true
-    //         ];
-    //     }
+    // Update Many
+    public function testUpdateMany()
+    {
+        $categories = []; // variabel data array
+        for ($i = 0; $i < 10; $i++) {
+            // insert 10 data category
+            $categories[] = [
+                // dimana tiap datanya 
+                "id" => "ID $i", // ada id
+                "name" => "Name $i", // ada name
+                // 'is_active' => true
+            ];
+        }
 
-    //     $result = Category::insert($categories);
-    //     self::assertTrue($result);
+        // static method
+        // method insert, dan masukan data categories yang kita insert
+        $result = Category::insert($categories);
+        self::assertTrue($result); // hasilnya harus true
 
-    //     Category::whereNull("description")->update([
-    //         "description" => "Updated"
-    //     ]);
-    //     $total = Category::where("description", "=", "Updated")->count();
-    //     self::assertEquals(10, $total);
-    // }
+        // model category yang null pada description, maka saya ingin update deskripsi menjadi tulisan "Updated"
+        Category::whereNull("description")->update([
+            "description" => "Updated"
+        ]);
+
+        // apakah description sudah berubah, kita lakukan query ke database 
+        // dimana description adalah Updated
+        $total = Category::where("description", "=", "Updated")
+            ->count(); // dan pastikan jumlahnya
+        self::assertEquals(10, $total); // adalah 10
+    }
 
     // public function testDelete()
     // {
