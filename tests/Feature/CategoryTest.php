@@ -161,28 +161,34 @@ class CategoryTest extends TestCase
         self::assertEquals(0, $total); // hasilnya sama dengan 0, dari total data 
     }
 
-    // public function testDeleteMany()
-    // {
-    //     $categories = [];
-    //     for ($i = 0; $i < 10; $i++) {
-    //         $categories[] = [
-    //             "id" => "ID $i",
-    //             "name" => "Name $i",
-    //             'is_active' => true
-    //         ];
-    //     }
+    // Delete Many
+    public function testDeleteMany()
+    {
+        $categories = []; // variabel data array
+        for ($i = 0; $i < 10; $i++) {
+            // insert 10 data category
+            $categories[] = [
+                // dimana tiap datanya 
+                "id" => "ID $i", // ada id
+                "name" => "Name $i", // ada name
+                // 'is_active' => true
+            ];
+        }
 
-    //     $result = Category::insert($categories);
-    //     self::assertTrue($result);
+        // static method
+        // method insert, dan masukan data categories yang kita insert
+        $result = Category::insert($categories);
+        self::assertTrue($result);
 
-    //     $total = Category::count();
-    //     assertEquals(10, $total);
+        $total = Category::count(); // total model category
+        assertEquals(10, $total); // hasilnya sama dengan 10, dari total data 
 
-    //     Category::whereNull("description")->delete();
+        // model category yang null pada description, maka saya ingin delete semua.
+        Category::whereNull("description")->delete();
 
-    //     $total = Category::count();
-    //     assertEquals(0, $total);
-    // }
+        $total = Category::count(); // total model category
+        assertEquals(0, $total); // hasilnya sama dengan 0, dari total data 
+    }
 
     // public function testCreate()
     // {
