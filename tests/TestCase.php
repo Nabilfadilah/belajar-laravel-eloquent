@@ -15,6 +15,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         // selalu lakukan delete ketika awal database
+        DB::delete("delete from products");
         DB::delete("delete from categories");
         DB::delete("delete from vouchers");
         DB::delete("delete from comments");

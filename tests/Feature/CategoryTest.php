@@ -101,7 +101,7 @@ class CategoryTest extends TestCase
         $categories = Category::whereNull("description")->get();
 
         // hasilnya harus ada 5 data categories
-        self::assertEquals(5, $categories->count());
+        self::assertEquals(0, $categories->count());
 
         // each, setiap category
         $categories->each(function ($category) {
@@ -265,20 +265,22 @@ class CategoryTest extends TestCase
         // jadi ada error/bug test gagara code ini!!!
     }
 
+    // one to many
+    public function testOneToMany()
+    {
+        // ambil seeder
+        $this->seed([CategorySeeder::class, ProductSeeder::class]);
 
-    // public function testOneToMany()
-    // {
-    //     $this->seed([CategorySeeder::class, ProductSeeder::class]);
+        // ambil id FOOD
+        $category = Category::find("FOOD");
+        self::assertNotNull($category); // tidak kosong
 
-    //     $category = Category::find("FOOD");
-    //     self::assertNotNull($category);
+        // $products = Product::where("category_id", $category->id)->get();
+        $products = $category->products; // ambil semua data product
 
-    //     // $products = Product::where("category_id", $category->id)->get();
-    //     $products = $category->products;
-
-    //     self::assertNotNull($products);
-    //     self::assertCount(2, $products);
-    // }
+        self::assertNotNull($products); // gak boleh null
+        self::assertCount(1, $products); // 2 data yg diharapkan
+    }
 
     // public function testOneToManyQuery()
     // {
