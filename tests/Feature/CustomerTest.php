@@ -69,31 +69,41 @@ class CustomerTest extends TestCase
         self::assertEquals("BCA", $virtualAccount->bank); // dari bank BCA
     }
 
-    // public function testManyToMany()
-    // {
-    //     $this->seed([CustomerSeeder::class, CategorySeeder::class, ProductSeeder::class]);
+    // Many to Many
+    public function testManyToMany()
+    {
+        // ambil seeder
+        $this->seed([CustomerSeeder::class, CategorySeeder::class, ProductSeeder::class]);
 
-    //     $customer = Customer::find("EKO");
-    //     self::assertNotNull($customer);
+        // ambil customer dari id EKO
+        $customer = Customer::find("EKO");
+        self::assertNotNull($customer); // gak boleh kosong
 
-    //     $customer->likeProducts()->attach("1");
+        $customer->likeProducts() // customer punya likePeoduct
+            ->attach("1"); // attach() tambah relasi, jadi masukan id product
 
-    //     $products = $customer->likeProducts;
-    //     self::assertCount(1, $products);
+        // akan di relasi kan data 1 product
+        $products = $customer->likeProducts;
+        self::assertCount(1, $products);
 
-    //     self::assertEquals("1", $products[0]->id);
-    // }
+        self::assertEquals("1", $products[0]->id);
+    }
 
-    // public function testManyToManyDetach()
-    // {
-    //     $this->testManyToMany();
+    // detach many to many
+    public function testManyToManyDetach()
+    {
+        // ambil funtion
+        $this->testManyToMany();
 
-    //     $customer = Customer::find("EKO");
-    //     $customer->likeProducts()->detach("1");
+        // ambil customer dari id EKO
+        $customer = Customer::find("EKO");
+        $customer->likeProducts()
+            ->detach("1"); // hapus id 1  
 
-    //     $products = $customer->likeProducts;
-    //     self::assertCount(0, $products);
-    // }
+        // nilainya harus 0
+        $products = $customer->likeProducts;
+        self::assertCount(0, $products);
+    }
 
     // public function testPivotAttribute()
     // {
