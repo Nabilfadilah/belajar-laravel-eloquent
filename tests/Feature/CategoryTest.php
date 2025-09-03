@@ -71,16 +71,19 @@ class CategoryTest extends TestCase
         self::assertEquals("Food Category", $category->description); // descripsinya
     }
 
-    // public function testUpdate()
-    // {
-    //     $this->seed(CategorySeeder::class);
+    // Update
+    public function testUpdate()
+    {
+        // ambil seeder class category 
+        $this->seed(CategorySeeder::class);
 
-    //     $category = Category::find("FOOD");
-    //     $category->name = "Food Updated";
+        // harus find() terlebih dahulu!!!
+        $category = Category::find("FOOD"); // pada model category, temukan id FOOD
+        $category->name = "Food Updated"; // name nya
 
-    //     $result = $category->update();
-    //     self::assertTrue($result);
-    // }
+        $result = $category->update(); // hasilnya, update data category
+        self::assertTrue($result); // harus true
+    }
 
     // public function testSelect()
     // {
