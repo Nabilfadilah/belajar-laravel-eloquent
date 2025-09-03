@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Voucher extends Model
 {
-    use HasUuids; // untuk memberitahu ke laravel bahwa model ini menggunakan id yang tipenya (uuid)
+    // untuk memberitahu ke laravel bahwa model ini menggunakan id yang tipenya (uuid)
+    // dan softdeletes 
+    use HasUuids, SoftDeletes;
 
     protected $table = 'vouchers';
     protected $primaryKey = "id";

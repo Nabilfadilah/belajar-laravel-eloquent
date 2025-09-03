@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Voucher;
+use Database\Seeders\VoucherSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -37,19 +38,25 @@ class VoucherTest extends TestCase
         self::assertNotNull($voucher->voucher_code);
     }
 
-    // public function testSoftDelete()
-    // {
-    //     // $this->seed(VoucherSeeder::class);
+    // Soft Delete
+    public function testSoftDelete()
+    {
+        // panggil seeder voucher
+        $this->seed(VoucherSeeder::class);
 
-    //     $voucher = Voucher::where('name', '=', 'Sample Voucher')->first();
-    //     $voucher->delete();
+        // data Voucher, dimana 'name' sama dengan 'sample voucher' 
+        $voucher = Voucher::where('name', '=', 'Sample Voucher')->first();
+        $voucher->delete(); // lakukan delete data
 
-    //     $voucher = Voucher::where('name', '=', 'Sample Voucher')->first();
-    //     self::assertNull($voucher);
+        // data Voucher, dimana 'name' sama dengan 'sample voucher' 
+        $voucher = Voucher::where('name', '=', 'Sample Voucher')->first();
+        self::assertNull($voucher); // hasilnya voucher tidak boleh kosong
 
-    //     $voucher = Voucher::withTrashed()->where('name', '=', 'Sample Voucher')->first();
-    //     self::assertNotNull($voucher);
-    // }
+        // data Voucher, withTrashed() mengambil seluruh data termasuk yang sudah di soft delete,
+        // dimana 'name' sama dengan 'sample voucher' 
+        $voucher = Voucher::withTrashed()->where('name', '=', 'Sample Voucher')->first();
+        self::assertNotNull($voucher); // hasilnya vourcher tidak boleh kosong
+    }
 
     // public function testLocalScope()
     // {
