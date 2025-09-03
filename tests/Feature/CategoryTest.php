@@ -146,17 +146,20 @@ class CategoryTest extends TestCase
         self::assertEquals(10, $total); // adalah 10
     }
 
-    // public function testDelete()
-    // {
-    //     $this->seed(CategorySeeder::class);
+    // Delete
+    public function testDelete()
+    {
+        // ambil seeder class category 
+        $this->seed(CategorySeeder::class);
 
-    //     $category = Category::find("FOOD");
-    //     $result = $category->delete();
-    //     self::assertTrue($result);
+        // dari table category, temukan id "FOOD"
+        $category = Category::find("FOOD");
+        $result = $category->delete(); // hasilnya delete category id 'FOOD'
+        self::assertTrue($result); // harus benar hasilnya
 
-    //     $total = Category::count();
-    //     self::assertEquals(0, $total);
-    // }
+        $total = Category::count(); // total model category
+        self::assertEquals(0, $total); // hasilnya sama dengan 0, dari total data 
+    }
 
     // public function testDeleteMany()
     // {
