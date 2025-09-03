@@ -279,7 +279,7 @@ class CategoryTest extends TestCase
         $products = $category->products; // ambil semua data product
 
         self::assertNotNull($products); // gak boleh null
-        self::assertCount(1, $products); // 2 data yg diharapkan
+        self::assertCount(2, $products); // 2 data yg diharapkan
     }
 
     // Query Builder Relationship
@@ -312,25 +312,26 @@ class CategoryTest extends TestCase
 
         $category = Category::find("FOOD");
         $products = $category->products;
-        self::assertCount(1, $products);
+        self::assertCount(2, $products);
 
         // nyari ke tabel product yg stok 1
         $outOfStockProducts = $category->products()->where('stock', '<=', 0)->get();
-        self::assertCount(1, $outOfStockProducts);
+        self::assertCount(2, $outOfStockProducts);
     }
 
-    // public function testHasManyThrough()
-    // {
-    //     $this->seed([CategorySeeder::class, ProductSeeder::class, CustomerSeeder::class, ReviewSeeder::class]);
+    // Has Many Through 
+    public function testHasManyThrough()
+    {
+        // ambil seeder
+        $this->seed([CategorySeeder::class, ProductSeeder::class, CustomerSeeder::class, ReviewSeeder::class]);
 
-    //     $category = Category::find("FOOD");
-    //     self::assertNotNull($category);
+        $category = Category::find("FOOD");
+        self::assertNotNull($category);
 
-    //     $reviews = $category->reviews;
-    //     self::assertNotNull($reviews);
-    //     self::assertCount(2, $reviews);
-
-    // }
+        $reviews = $category->reviews;
+        self::assertNotNull($reviews);
+        self::assertCount(2, $reviews); // hasil 2 review
+    }
 
     // public function testQueryingRelations()
     // {
