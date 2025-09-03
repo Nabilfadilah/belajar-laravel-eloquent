@@ -28,27 +28,33 @@ class CategoryTest extends TestCase
         self::assertTrue($result);
     }
 
-    // public function testInsertMany()
-    // {
-    //     $categories = [];
-    //     for ($i = 0; $i < 10; $i++) {
-    //         $categories[] = [
-    //             "id" => "ID $i",
-    //             "name" => "Name $i",
-    //             'is_active' => true
-    //         ];
-    //     }
+    // Insert Many
+    public function testInsertMany()
+    {
+        $categories = []; // variabel dalam array
+        for ($i = 0; $i < 10; $i++) {
+            // insert 10 data category
+            $categories[] = [
+                // dimana tiap datanya 
+                "id" => "ID $i", // ada id
+                "name" => "Name $i", // ada name
+                // 'is_active' => true
+            ];
+        }
 
-    //     // $result = Category::query()->insert($categories);
-    //     $result = Category::insert($categories);
+        // static method
+        // method insert, dan masukan data categories yang kita insert
+        // $result = Category::query()->insert($categories); //
+        $result = Category::insert($categories); // ini pake magic method, karena gak perlu pake 'query()'
 
-    //     self::assertTrue($result);
+        // harus true
+        self::assertTrue($result);
 
-    //     // $total = Category::query()->count();
-    //     $total = Category::count();
-
-    //     self::assertEquals(10, $total);
-    // }
+        // hasil jumlah data yang di insert
+        // $total = Category::query()->count();
+        $total = Category::count(); // Category = model
+        self::assertEquals(10, $total);
+    }
 
     // public function testFind()
     // {
