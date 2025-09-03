@@ -38,7 +38,7 @@ class CategoryTest extends TestCase
                 // dimana tiap datanya 
                 "id" => "ID $i", // ada id
                 "name" => "Name $i", // ada name
-                // 'is_active' => true
+                'is_active' => true
             ];
         }
 
@@ -125,7 +125,7 @@ class CategoryTest extends TestCase
                 // dimana tiap datanya 
                 "id" => "ID $i", // ada id
                 "name" => "Name $i", // ada name
-                // 'is_active' => true
+                'is_active' => true
             ];
         }
 
@@ -171,7 +171,7 @@ class CategoryTest extends TestCase
                 // dimana tiap datanya 
                 "id" => "ID $i", // ada id
                 "name" => "Name $i", // ada name
-                // 'is_active' => true
+                'is_active' => true
             ];
         }
 
@@ -244,21 +244,27 @@ class CategoryTest extends TestCase
         self::assertNotNull($category->id); // id tidak boleh kosong
     }
 
-    // public function testGlobalScope()
-    // {
-    //     $category = new Category();
-    //     $category->id = "FOOD";
-    //     $category->name = "Food";
-    //     $category->description = "Food Category";
-    //     $category->is_active = false;
-    //     $category->save();
+    // Global Scope
+    public function testGlobalScope()
+    {
+        $category = new Category(); // ambil model category
+        $category->id = "FOOD";
+        $category->name = "Food";
+        $category->description = "Food Category";
+        $category->is_active = false; // isactive false
+        $category->save(); // simpan data 
 
-    //     $category = Category::find("FOOD");
-    //     self::assertNull($category);
+        // data categort temukan id 'FOOD'
+        $category = Category::find("FOOD");
+        self::assertNull($category); // tidak boleh null
 
-    //     $category = Category::withoutGlobalScopes([IsActiveScope::class])->find("FOOD");
-    //     self::assertNotNull($category);
-    // }
+        // model category, yang mematikan Global Scope, dari daftar Global Scope yang ingin kita hilangkan
+        $category = Category::withoutGlobalScopes([IsActiveScope::class])->find("FOOD");
+        self::assertNotNull($category);
+
+        // jadi ada error/bug test gagara code ini!!!
+    }
+
 
     // public function testOneToMany()
     // {
