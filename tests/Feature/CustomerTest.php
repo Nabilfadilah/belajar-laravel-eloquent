@@ -54,17 +54,20 @@ class CustomerTest extends TestCase
         self::assertNotNull($wallet->customer_id);
     }
 
-    // public function testHasOneThrough()
-    // {
-    //     $this->seed([CustomerSeeder::class, WalletSeeder::class, VirtualAccountSeeder::class]);
+    // Has One Through
+    public function testHasOneThrough()
+    {
+        // ambil seeder
+        $this->seed([CustomerSeeder::class, WalletSeeder::class, VirtualAccountSeeder::class]);
 
-    //     $customer = Customer::find("EKO");
-    //     self::assertNotNull($customer);
+        // dari database customer, ambil Id ABIL
+        $customer = Customer::find("ABIL");
+        self::assertNotNull($customer); // tidak boleh null
 
-    //     $virtualAccount = $customer->virtualAccount;
-    //     self::assertNotNull($virtualAccount);
-    //     self::assertEquals("BCA", $virtualAccount->bank);
-    // }
+        $virtualAccount = $customer->virtualAccount; // ambil secara langsung data virtualAccount dan join dengan table wallet 
+        self::assertNotNull($virtualAccount); // gak boleh null va nya
+        self::assertEquals("BCA", $virtualAccount->bank); // dari bank BCA
+    }
 
     // public function testManyToMany()
     // {
